@@ -32,6 +32,8 @@ WHITE="\[\033[0;37m\]"
 WHITEB="\[\033[1;37m\]"
 RESET="\[\033[0;0m\]"
 
+source ~/.bashrc
+
 git_branch () {
     if git rev-parse --git-dir >/dev/null 2>&1
         # then echo -e "" git:\($(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')\)
@@ -83,7 +85,7 @@ export PATH=$PATH:/Users/rdas/Downloads/apache-maven-3.5.4/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/Users/rdas/go/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-
+export GITHUB_TOKEN=14dd3024f454475934acb42f49353bfe98a891dc
 # ---------------------- ALIAS -------------------------
 alias tmux="TERM=screen-256color-bce tmux"
 alias tree='tree -F'
@@ -107,6 +109,18 @@ function find_replace() {
 
 function go_cover() {
     go test -cover -coverprofile /dev/stderr 2>&1 >/dev/null | go tool cover -func /dev/stdin
+}
+
+function set_namespace() {
+    kubectl config set-context --current --namespace=$1
+}
+
+function cluster_status() {
+    kc get cs
+}
+
+function current_namespace() {
+    kubectl config view --minify --output 'jsonpath={..namespace}'
 }
 
 alias rdas="cd \$GOPATH/src"
@@ -137,4 +151,7 @@ function tcp_port() {
 export GO111MODULE=auto
 export PATH=$PATH:/usr/local/go/bin
 export BASH_SILENCE_DEPRECATION_WARNING=1
-eval "$(direnv hook bash)"
+
+[ -s "/Users/rajdeepdas/.jabba/jabba.sh" ] && source "/Users/rajdeepdas/.jabba/jabba.sh"
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
