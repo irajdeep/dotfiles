@@ -85,7 +85,6 @@ export PATH=$PATH:/Users/rdas/Downloads/apache-maven-3.5.4/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/Users/rdas/go/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export GITHUB_TOKEN=14dd3024f454475934acb42f49353bfe98a891dc
 # ---------------------- ALIAS -------------------------
 alias tmux="TERM=screen-256color-bce tmux"
 alias tree='tree -F'
